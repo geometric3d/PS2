@@ -189,10 +189,10 @@
 \newcommand{\courseSem}{\href{https://geometric3d.github.io}{Fall 2024}}
 \newcommand{\courseUrl}{\url{https://piazza.com/cmu/fall2024/16822}}
 \newcommand{\hwNum}{Problem Set 2}
-\newcommand{\hwTopic}{Projective Geometry and Homography }
+\newcommand{\hwTopic}{Single View Geometry and Reconstruction}
 \newcommand{\hwName}{\hwNum: \hwTopic}
 \newcommand{\outDate}{Sep. 24, 2024}
-\newcommand{\dueDate}{Oct. 1, 2024 23:59}
+\newcommand{\dueDate}{Oct. 01, 2024 11:59 PM}
 \newcommand{\instructorName}{Shubham Tulsiani}
 \newcommand{\taNames}{Jianjin Xu, Easton Potokar}
 
@@ -257,17 +257,17 @@
   TAs: \taNames
 \end{center}
 
+
 \section*{START HERE: Instructions}
 \begin{itemize}
 \item \textbf{Collaboration policy:} All are encouraged to work together BUT you must do your own work (code and write up). If you work with someone, please include their name in your write up and cite any code that has been discussed. If we find highly identical write-ups or code without proper accreditation of collaborators, we will take action according to university policies, i.e. you will likely fail the course. See the \href{https://www.dropbox.com/s/z6o0tinc9eaez46/L01_Overview.pdf?dl=0}{Academic Integrity Section} detailed in the initial lecture for more information.
 
-\item\textbf{Late Submission Policy:} There are \textbf{no} late days for Problem Set submissions.
 
 \item\textbf{Submitting your work:}
 
 \begin{itemize}
 
-\item We will be using Gradescope (\url{https://gradescope.com/}) to submit the Problem Sets. Please use the provided template. Submissions can be written in LaTeX. Regrade requests can be made, however this gives the TA the opportunity to regrade your entire paper, meaning if additional mistakes are found then points will be deducted.
+\item We will be using Gradescope (\url{https://gradescope.com/}) to submit the Problem Sets. Please use the provided template. Submissions can be written in LaTeX or scanned documents. Regrade requests can be made, however this gives the TA the opportunity to regrade your entire paper, meaning if additional mistakes are found then points will be deducted.
 Each derivation/proof should be  completed on a separate page. For short answer questions you \textbf{should} include your work in your solution.  
 \end{itemize}
 
@@ -277,177 +277,114 @@ Each derivation/proof should be  completed on a separate page. For short answer 
 
 For multiple choice or select all that apply questions, replace \lstinline{\choice} with \lstinline{\CorrectChoice} to obtain a shaded box/circle, and don't change anything else.
 
-\clearpage
 
-\section*{Instructions for Specific Problem Types}
+For questions where you must fill in a blank, please make sure your final answer is fully included in the given space. You may cross out answers or parts of answers, but the final answer must still be within the given space. We accept either LaTex pdfs or scanned documents as long as the location of each question is annotated properly.
 
-For ``Select One" questions, please fill in the appropriate bubble completely:
-
-\begin{quote}
-\textbf{Select One:} Who taught this course?
-     \begin{checkboxes}
-     \CorrectChoice Shubham Tulsiani
-     \choice Deepak Pathak
-     \choice Fernando De la Torre
-     \choice Deva Ramanan
-    \end{checkboxes}
-\end{quote}
-
-For ``Select all that apply" questions, please fill in all appropriate squares completely:
-
-\begin{quote}
-\textbf{Select all that apply:} Which are scientists?
-{
-    \checkboxchar{$\Box$} \checkedchar{$\blacksquare$}
-    \begin{checkboxes}
-     \CorrectChoice Stephen Hawking
-     \CorrectChoice Albert Einstein
-     \CorrectChoice Isaac Newton
-     \choice None of the above
-    \end{checkboxes}
-    }
-\end{quote}
-
-For questions where you must fill in a blank, please make sure your final answer is fully included in the given space. You may cross out answers or parts of answers, but the final answer must still be within the given space.
-
-\begin{quote}
-\textbf{Fill in the blank:} What is the course number?
-
-\begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter, halign=center, valign=center]
-    \begin{center}\huge16-822\end{center}
-    \end{tcolorbox}\hspace{2cm}
-\end{quote}
 
 \clearpage
 
-\section{2D Projective Geometry  [18 pts]}
+\section{Camera Models  [12 pts]}
 \begin{questions}
 
-\question (a) \textbf{[2 pts]} Calculate the line passing through 2 given points: (1) $\pv_1= [3,4,1]^T, \pv_2 = [4,3,0]^T$, (2) $\pv_1= [3,4,2022]^T, \pv_2 = [3,4,-1967]^T$.
+\question \textbf{[8 pts]} Are these statements true or false?
 
-(b) \textbf{[2 pts]} Calculate the intersection point between 2 given lines: (1) $\lv_1 = [3,4,1]^T, \lv_2 = [0,0,1]^T $, (2) $\lv_1= [3,4,1]^T, \lv_2 = [3,4,2]^T$.
+(a) Any camera projection matrix $\Pv$ can be decomposed as $\Kv\Rv[\Iv | -\tilde{\Cv}]$.
 
-\begin{tcolorbox}[fit,height=9cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
+(b) A camera with centre at infinity is an affine camera.
 
+(c) If a $3\times 4$ matrix $\Pv$ represents an affine camera, then $rank(\Pv)=2$.
 
-\end{tcolorbox}
+(d) $\Pv^{+}\uv$ corresponds to a point at infinity given a image location $\uv$ and a camera matrix $\Pv$, where $\Pv^{+} = \Pv^{\mathsf{T}}(\Pv\Pv^{\mathsf{T}})^{-1}$.
 
-\question \textbf{[3 pts]} Suppose a conic in 2D projective space is given by $\Cv = \lv\mv^T + \mv\lv^T$, where $\lv$ and $\mv$ are 2 lines. Show that a point belongs to $\Cv$ if and only if it is on $\mv$ or $\lv$.
-
-\begin{tcolorbox}[fit,height=9cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
-
-\end{tcolorbox}
-
-\question \textbf{[4 pts]} Given a transformation $\Hv = \begin{bmatrix}
-                 3 & 0 & 0  \\
-                 0 & 2 & 0  \\
-                 0 & 0 & 1  \\
-                \end{bmatrix}$,
-
-(a) transform a point $\pv = [3,4,1]^T$,
-
-(b) transform a line $\lv = [-4, 3, 0]$
-
-(c) transform a conic $\Cv = \begin{bmatrix}
-                 1 & 0 & 0  \\
-                 0 & 2 & 0  \\
-                 0 & 0 & 3  \\
-                \end{bmatrix}$
-
-(d) does this transformation leaves the circular points at infinity unchanged? Explain the reason without calculation.
-
-\begin{tcolorbox}[fit,height=17cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
+\begin{tcolorbox}[fit,height=18cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
 
 
 \end{tcolorbox}
 
-\question \textbf{[4 pts]} Are these 2D projective transformations?
+\question \textbf{[4 pts]} What is the direction of surface normal to the principal plane? 
 
-(a) Reflection along a line,
+(a) when expressed in terms of the elements of $\Pv = \begin{bmatrix}
+p_{11} & p_{12} & p_{13} & p_{14} \\ 
+p_{21} & p_{22} & p_{23} & p_{24} \\ 
+p_{31} & p_{32} & p_{33} & p_{34}
+\end{bmatrix}$
 
-(b) Doubling spherical coordinates: $(r,\theta) \rightarrow (2r, 2\theta)$,
+(b) when expressed in terms of the elements of the intrinsic matrix $\Kv$, rotation $\Rv$, and camera centre $\tilde{\Cv}$.
 
-(c) A picture hanging on a wall and its image taken by a camera,
+For both the above, your answer need not be a normalized vector.
 
-(d) Transformation between these 2 world maps.
-\begin{figure}[h!]
-    \centering
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        {\includegraphics[width=0.33\linewidth]{figures/Mercator_projection_SW.jpg}}
-    \end{subfigure}
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        {\includegraphics[width=0.5\textwidth]{figures/Mollweide_projection_SW.jpg}}
-    \end{subfigure}
-\end{figure}
-
-\begin{tcolorbox}[fit,height=5cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
-
-
-\end{tcolorbox}
-
-\question \textbf{[3 pts]} Are these statements true or false?
-
-
-(a) Given a line $\lv$, if both $\Hv_A$ and $\Hv_B$ map $\lv$ to $[0,0,1]^T$, then $\Hv_A\Hv_B^{-1}$ is an affine transformation. 
-
-(b) Instead of annotating orthogonal lines, if we annotate multiple pairs of lines that form 45 degree angles in the metric space, we can still calculate $\Cv_\infty^{\star}{}'$.
-
-(c) If we are allowed to annotate pairs of parallel and orthogonal lines, we need at least 5 pairs of them to calculate $\Cv_\infty^{\star}{}'$.
-
-\begin{tcolorbox}[fit,height=7cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
-
+\begin{tcolorbox}[fit,height=18cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
 
 
 \end{tcolorbox}
 
 
-\section{3D Projective Geometry [12 pts]}
+\section{Single-view Geometry [12 pts]}
 
-\question \textbf{[3 pts]} Show that the Plucker Representation of a 3D line $\Lv = \xv_1\xv_2^T - \xv_2\xv_1^T$ is equivalent to representing the line as $(\tilde \dv, \tilde \xv \times \tilde \dv)$, i.e. show they have the same elements up to scale.
+\question \textbf{[8 pts]} How many 3D to 2D correspondences would be required to determine the camera matrix $\Pv$ in each of these cases? Which of these cases can be solved by reducing the constraints on the unknown variables to equations of the form $\Av\xv=\bv$, or $\Av\xv=\mathbf{0}~\text{s.t.}~||x||=1$?
 
-Notations: $\tilde\dv$ is the unit direction vector along the line, and $\tilde \xv$ is any point on the line. Note that $\tilde\xv$ and $\tilde\dv$ are 3-dim Euclidean coordinates while $\xv_1$ and $\xv_2$ are 4-dim homogeneous coordinates.
+(a) $\Pv$ matrix given all unknowns.
 
-\begin{tcolorbox}[fit,height=19cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
+(b) Known camera rotation and intrinsics, but unknown camera translation.
 
+(c) Known camera extrinsics, and unknown camera intrinsics but with the information that pixels are square.
 
-\end{tcolorbox}
+(d) $\Pv$ matrix given $\Pv$ corresponds to an affine camera.
 
-\question \textbf{[2 pts]} Suppose $\Uv$ is a $4\times 4$ matrix. $\Uv_{4 \times 4} = [\uv_1, \uv_2, \uv_3, \uv_4]$ and $\Uv^T\Uv = \Iv$.
-
-(a) Suppose $\uv_1, \uv_2, \uv_3$ represent 3 points in the 3D space. What is the plane passing through these 3 points?
-
-(b) Suppose $\uv_1, \uv_2, \uv_3, \uv_4$ represent 4 points in the 3D space. Let $\lv_1$ be the line passing through $\uv_1, \uv_2$, and $\lv_2$ be the line passing through $\uv_3, \uv_4$. Do $\lv_1$ and $\lv_2$ intersect or not? (Only consider real-number points.)
-
-\begin{tcolorbox}[fit,height=19cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
-
+\begin{tcolorbox}[fit,height=16.5cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
 
 
 \end{tcolorbox}
 
-\question \textbf{[4 pts]} (a) Calculate the 3D transformation $\Hv$ that represents the projection onto a plane $\pi = [\nv^T, 0]^T$, where $\nv = [a,b,c]^T$ is a unit vector.
+\question \textbf{[4 pts]} Given a line $\lv$ in an image, what is the equation of the plane that projects to $\lv$? You may assume $\Pv$ is known.
 
-(b) Calculate the 3D transformation $\Hv$ that represents the reflection along a plane $\pi = [\nv^T, 0]^T$, where $\nv = [a,b,c]^T$ is a unit vector.
-
-\begin{tcolorbox}[fit,height=20cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
-
+\begin{tcolorbox}[fit,height=9.5cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
 
 
 \end{tcolorbox}
 
-\question \textbf{[3 pts]} In the lecture, we introduced an algorithm to compute homography between images from 4 pairs of point correspondences. Design an algorithm that instead uses pairs of line correspondences. Write the constraints provided by each correspondence, and how to compute the $\Hv$ that satisfies these.
+\section{Single-view Reconstruction [16 pts]}
 
-\begin{tcolorbox}[fit,height=19cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
+\question \textbf{[4 pts]} Show that the absolute conic in $\mathbb{P}^3$ is unchanged under a 3D euclidean transform.
 
+\begin{tcolorbox}[fit,height=10cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
 
 
 \end{tcolorbox}
 
+\question \textbf{[8 pts]} Are these statements true or false?
+
+(a) The image of absolute conic $\omega$ only comprises of imaginary points in the image plane.
+
+(b) The rays corresponding to pixels $\uv_1$ and $\uv_2$ are orthogonal if and only if $\uv_1^T \omega \uv_2 = 0$.
+
+(c) Assuming zero skew, the IAC can be identified given 4 sets of vanishing points for line pairs in orthogonal directions.
+
+(d) The homography between the image plane and the plane at infinity does not depend on the camera location.
+
+\begin{tcolorbox}[fit,height=18cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
+
+
+\end{tcolorbox}
+
+\question \textbf{[4 pts]} Given $\Kv=diag(2,2,1)$, find the normal direction of a plane whose vanishing line is given by $[1,2,3]^T$.
+
+\begin{tcolorbox}[fit,height=16cm, width=\textwidth, blank, borderline={0.5pt}{-2pt},halign=left, valign=center, nobeforeafter]
+
+
+\end{tcolorbox}
 
 \end{questions}
 
 \clearpage
+\textbf{Attendance Question:} Among Lectures 8-11, how many did you attend in person?
+
+\begin{tcolorbox}[fit,height=1cm,blank, borderline={1pt}{-2pt},nobeforeafter]
+    %Input your solution here.  Do not change any of the specifications of this solution box.
+\end{tcolorbox}
+
+
+% \clearpage
 
 \textbf{Collaboration Questions} Please answer the following:
 

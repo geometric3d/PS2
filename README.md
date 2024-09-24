@@ -2,7 +2,7 @@
 
 ## Instructions
 
-* There are `2` sections in this assignment, comprising `30 pts` in total.
+* There are `2` sections in this assignment, comprising `40 pts` in total.
 
 
 # How to submit problem sets (PS)?
